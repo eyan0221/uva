@@ -26,24 +26,20 @@ unsigned int pattern[6][3] = {
     {G, C, B} 
 };
 
-unsigned int move_count (int c1, int c2, int c3)
-{
-    return line[1][c1] + line[2][c1] + 
-           line[0][c2] + line[2][c2] +
-           line[0][c3] + line[1][c3];
-}
-
 int main()
 {
-    unsigned int i, j, min, idx;
+    unsigned int i, j, min, idx, sum = 0;
     
     cout << "Sample Input" << endl;
-    for (i = 0; i < 3; i++)
-        for (j = 0; j < 3; j++)
+    for (i = 0; i < 3; i++) {
+        for (j = 0; j < 3; j++) {
             cin >> line[i][j];
+            sum += line[i][j];
+        }
+    }
   
     for (i = 0; i < 6; i++) {
-        count[i] = move_count(pattern[i][0], pattern[i][1], pattern[i][2]);
+        count[i] = sum - (line[0][pattern[i][0]] + line[1][pattern[i][1]] + line[2][pattern[i][2]]);
         if (min == 0 || count[i] < min) {
             min = count[i];
             idx = i;
